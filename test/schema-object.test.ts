@@ -5,6 +5,7 @@ const options: TransformSchemaObjectOptions = {
   path: "#/test/schema-object",
   ctx: {
     additionalProperties: false,
+
     alphabetize: false,
     defaultNonNullable: false,
     discriminators: {},
@@ -43,7 +44,7 @@ describe("Schema Object", () => {
         const generated = transformSchemaObject(schema, options);
         expect(generated).toBe(`{
   /** @enum {unknown} */
-  status?: "complete" | "incomplete";
+  status: "complete" | "incomplete";
 }`);
       });
 
@@ -130,7 +131,7 @@ describe("Schema Object", () => {
         const generated = transformSchemaObject(schema, options);
         expect(generated).toBe(`{
   required: boolean;
-  optional?: boolean;
+  optional: boolean;
 }`);
       });
 
@@ -142,7 +143,7 @@ describe("Schema Object", () => {
         };
         const generated = transformSchemaObject(schema, options);
         expect(generated).toBe(`{
-  property?: boolean;
+  property: boolean;
   [key: string]: string | undefined;
 }`);
       });
@@ -178,7 +179,7 @@ describe("Schema Object", () => {
         const schema: SchemaObject = { type: "object", properties: { string: { type: "string" } }, nullable: true };
         const generated = transformSchemaObject(schema, options);
         expect(generated).toBe(`{
-  string?: string;
+  string: string;
 } | null`);
       });
     });
@@ -319,7 +320,7 @@ describe("Schema Object", () => {
   required: boolean;
   /** @default false */
   requiredDefault: boolean;
-  optional?: boolean;
+  optional: boolean;
   /** @default false */
   optionalDefault: boolean;
 }`);
@@ -355,6 +356,6 @@ describe("ReferenceObject", () => {
         },
         options
       )
-    ).toBe("{\n  string?: string;\n}");
+    ).toBe("{\n  string: string;\n}");
   });
 });

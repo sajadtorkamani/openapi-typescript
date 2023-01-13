@@ -168,7 +168,8 @@ export function defaultSchemaObjectTransform(
       let key = escObjKey(k);
       let isOptional = !Array.isArray(schemaObject.required) || !schemaObject.required.includes(k);
       if (isOptional && ctx.defaultNonNullable && "default" in v) isOptional = false; // if --default-non-nullable specified and this has a default, it’s no longer optional
-      if (isOptional) key = tsOptionalProperty(key);
+      // if (isOptional) key = tsOptionalProperty(key);
+      // if (isOptional) key = tsOptionalProperty(key);
       if (ctx.immutableTypes || schemaObject.readOnly) key = tsReadonly(key);
       coreType.push(indent(`${key}: ${transformSchemaObject(v, { path, ctx: { ...ctx, indentLv } })};`, indentLv));
     }
